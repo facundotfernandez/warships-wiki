@@ -1,4 +1,4 @@
-import { data as commonData } from "/data-sources/common.js";
+import { data as commonData } from "../data-sources/common.js";
 const navbar = document.getElementById("navbar");
 
 async function initIndexPage() {

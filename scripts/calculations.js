@@ -1,4 +1,4 @@
-import { data as unitsData } from "/data-sources/calculations.js";
+import { data as unitsData } from "../data-sources/calculations.js";
 const converterContainer = document.getElementById('calculations');
 
 async function initConverters() {
