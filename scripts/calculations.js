@@ -101,13 +101,13 @@ function generateConverterCard(unitType, locale) {
 }
 
 function createSelect(defaultUnits, localizedUnits) {
-    const select = document.createElement('select');
+    let select = document.createElement('select');
 
     if (defaultUnits && localizedUnits && defaultUnits.length === localizedUnits.length) {
         defaultUnits.forEach((defaultUnit, i) => {
-            const option = document.createElement('option');
-            const englishValue = defaultUnit.toLowerCase();
-            const localizedValue = localizedUnits[i];
+            let option = document.createElement('option');
+            let englishValue = defaultUnit.toLowerCase();
+            let localizedValue = localizedUnits[i];
 
             option.value = englishValue;
             option.textContent = localizedValue;
@@ -123,8 +123,8 @@ function createSelect(defaultUnits, localizedUnits) {
 
 function calculateConversion(value, fromUnit, toUnit, output, conversions) {
     if (!isNaN(value)) {
-        const baseValue = value * conversions[fromUnit].toMain;
-        const result = baseValue * conversions[toUnit].fromMain;
+        let baseValue = value * conversions[fromUnit].toMain;
+        let result = baseValue * conversions[toUnit].fromMain;
         output.value = (Number.isInteger(result)) ? result.toFixed(0) : result.toFixed(3);
     } else {
         output.value = '';
