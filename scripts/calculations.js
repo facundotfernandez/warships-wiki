@@ -46,7 +46,7 @@ function generateConverterCard(unitType, locale) {
     inputValue.classList.add("input-value");
     inputValue.id = `${defaultName}-value-input`;
 
-    const selectFrom = createSelect(unitType.units["en"], unitType.units[locale]);
+    const selectFrom = createSelect(unitType.units.en, unitType.units[locale]);
     selectFrom.setAttribute("title", unitsData.placeholders.inputSelect[locale]);
     selectFrom.id = `${defaultName}-select-from`;
     selectFrom.name = `${defaultName}-select-from`;
@@ -70,7 +70,7 @@ function generateConverterCard(unitType, locale) {
     outputValue.classList.add("output-value");
     outputValue.id = `${defaultName}-result-output`;
 
-    const selectTo = createSelect(unitType.units["en"], unitType.units[locale]);
+    const selectTo = createSelect(unitType.units.en, unitType.units[locale]);
     selectTo.setAttribute("title", unitsData.placeholders.outputSelect[locale]);
     selectTo.id = `${defaultName}-select-to`;
     selectTo.name = `${defaultName}-select-to`;
@@ -103,17 +103,21 @@ function generateConverterCard(unitType, locale) {
 function createSelect(defaultUnits, units) {
     const select = document.createElement('select');
 
-    defaultUnits.forEach((defaultUnit, index) => {
-        const option = document.createElement('option');
-        const englishValue = defaultUnit.toLowerCase();
-        const localizedValue = units[index];
+    if (defaultUnits && units && defaultUnits.length === units.length) {
+        defaultUnits.forEach((defaultUnit, index) => {
+            const option = document.createElement('option');
+            const englishValue = defaultUnit.toLowerCase();
+            const localizedValue = units[index];
 
-        option.value = englishValue;
-        option.textContent = localizedValue;
+            option.value = englishValue;
+            option.textContent = localizedValue;
 
-        select.appendChild(option);
-    });
-
+            select.appendChild(option);
+        });
+    } else {
+        console.log(defaultUnits);
+        console.log(units);
+    }
     return select;
 }
 
