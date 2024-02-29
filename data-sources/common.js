@@ -40,8 +40,8 @@ const data = {
   navbarButtons:
     [
       {
-        id: "home",
-        reference: "./home.html",
+        id: "index",
+        reference: "./index.html",
         icon: "home",
         hrAfter: true,
         translations: {

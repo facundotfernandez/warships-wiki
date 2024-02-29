@@ -26,7 +26,7 @@ function createNavbar(theme, locale) {
     buttonContainer.setAttribute("data-button-id", button.id.toLowerCase());
     if (window.location.pathname === ("/" + button.id + ".html")) {
       buttonContainer.setAttribute("href", "#top");
-    } else if (button.id === "calculations" || button.id === "home") {
+    } else if (button.id === "calculations" || button.id === "index") {
       buttonContainer.setAttribute("href", button.reference.toLowerCase());
     }
     buttonIcon.classList.add("fas", `fa-${button.icon.toLowerCase()}`);
