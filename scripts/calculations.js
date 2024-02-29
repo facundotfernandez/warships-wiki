@@ -100,14 +100,14 @@ function generateConverterCard(unitType, locale) {
     converterContainer.appendChild(card);
 }
 
-function createSelect(defaultUnits, units) {
+function createSelect(defaultUnits, localizedUnits) {
     const select = document.createElement('select');
 
-    if (defaultUnits && units && defaultUnits.length === units.length) {
-        defaultUnits.forEach((defaultUnit, index) => {
+    if (defaultUnits && localizedUnits && defaultUnits.length === localizedUnits.length) {
+        defaultUnits.forEach((defaultUnit, i) => {
             const option = document.createElement('option');
             const englishValue = defaultUnit.toLowerCase();
-            const localizedValue = units[index];
+            const localizedValue = localizedUnits[i];
 
             option.value = englishValue;
             option.textContent = localizedValue;
