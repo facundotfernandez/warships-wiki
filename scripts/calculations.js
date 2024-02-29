@@ -5,18 +5,18 @@ async function initConverters() {
     try {
         let currentLocale = localStorage.getItem("currentLocale");
         for (let i = 0; i < 3; i++) {
-            unitsData.converterTypes.forEach(unitType => {
-                generateConverterCard(unitType, currentLocale);
+            unitsData.converterTypes.forEach(async unitType => {
+                await generateConverterCard(unitType, currentLocale);
             });
         }
-        addListenerUpdateLang();
+        await addListenerUpdateLang();
     } catch (error) {
         console.error("Error loading converters: ", error);
         throw error;
     }
 }
 
-function generateConverterCard(unitType, locale) {
+async function generateConverterCard(unitType, locale) {
     const defaultName = unitType.name["en"].toLowerCase();
 
     const card = document.createElement("div");
@@ -192,7 +192,7 @@ function updateLang(locale) {
     addListenerUpdateLang();
 };
 
-function addListenerUpdateLang() {
+async function addListenerUpdateLang() {
     const langOptions = document.querySelectorAll('.lang-option');
     langOptions.forEach(langOption => {
         langOption.addEventListener("click", function () {
