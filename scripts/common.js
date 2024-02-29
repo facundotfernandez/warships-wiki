@@ -25,7 +25,7 @@ function createNavbar(theme, locale) {
     buttonContainer.classList.add("nav-button");
     buttonContainer.setAttribute("data-button-id", button.id.toLowerCase());
     if (window.location.pathname === ("/" + button.id + ".html")) {
-      buttonContainer.setAttribute("href", "#top");
+      buttonContainer.setAttribute("href", button.reference.toLowerCase() + "#top");
     } else if (button.id === "calculations" || button.id === "index") {
       buttonContainer.setAttribute("href", button.reference.toLowerCase());
     }
