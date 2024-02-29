@@ -5,9 +5,10 @@ async function initIndexPage() {
   try {
     let currentLocale = localStorage.getItem("currentLocale") || commonData.locales.default;
     let currentTheme = localStorage.getItem("currentTheme") || commonData.themes.default;
+    localStorage.setItem("currentLocale", currentLocale);
+    localStorage.setItem("currentTheme", currentTheme);
     createLoadingScreen();
     createNavbar(currentTheme, currentLocale);
-
   } catch (error) {
     console.error("Error loading page: ", error);
     throw error;
