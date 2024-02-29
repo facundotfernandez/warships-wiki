@@ -116,7 +116,7 @@ function createSelect(defaultUnits, localizedUnits) {
         });
     } else {
         console.log(defaultUnits);
-        console.log(units);
+        console.log(localizedUnits);
     }
     return select;
 }
