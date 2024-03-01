@@ -25,7 +25,7 @@ function createNavbar(theme, locale) {
 
     buttonContainer.classList.add("nav-button");
     buttonContainer.setAttribute("data-button-id", button.id.toLowerCase());
-    if ((window.location.pathname === ("/" + button.id + ".html")) || ((window.location.pathname === "/") && button.id === "index")) {
+    if ((window.location.pathname === ("/" + button.id + ".html")) || ((window.location.pathname === ("/" || "/warships-wiki/")) && button.id === "index")) {
       buttonContainer.setAttribute("href", "#top");
     } else if (button.id === "calculations" || button.id === "index") {
       buttonContainer.setAttribute("href", button.reference.toLowerCase());
