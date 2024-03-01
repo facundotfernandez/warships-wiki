@@ -23,9 +23,12 @@ function createNavbar(theme, locale) {
     let buttonIcon = document.createElement("i");
     let buttonTooltip = document.createElement("span");
 
+    const currentPath = window.location.pathname;
+    const isIndexPath = currentPath === "/" || currentPath === "/warships-wiki/";
+
     buttonContainer.classList.add("nav-button");
     buttonContainer.setAttribute("data-button-id", button.id.toLowerCase());
-    if ((window.location.pathname.endsWith("/" + button.id + ".html")) || ((window.location.pathname === ("/" || "/warships-wiki/")) && button.id === "index")) {
+    if ((currentPath.endsWith("/" + button.id + ".html")) || (isIndexPath && button.id === "index")) {
       buttonContainer.setAttribute("href", "#top");
     } else if (button.id === "calculations" || button.id === "index") {
       buttonContainer.setAttribute("href", button.reference.toLowerCase());
