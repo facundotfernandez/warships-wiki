@@ -9,6 +9,7 @@ async function initIndexPage() {
     localStorage.setItem("currentTheme", currentTheme);
     createLoadingScreen();
     createNavbar(currentTheme, currentLocale);
+    createFooter(currentLocale);
   } catch (error) {
     console.error("Error loading page: ", error);
     throw error;
@@ -63,6 +64,83 @@ function updateNavbar(locale) {
   updateLangSelector(locale)
 }
 
+function createFooter(locale) {
+  const mainContent = document.getElementById("content");
+  const footer = document.querySelector("footer");
+
+  const socialIcons = document.createElement("div");
+  socialIcons.className = "social-icons";
+
+  commonData.footer.socialButtons.forEach((button) => {
+    let socialIcon = document.createElement("a");
+    socialIcon.setAttribute("href", button.reference);
+    socialIcon.setAttribute("title", button.translations[locale]);
+    socialIcon.className = "social-icon";
+
+    let socialIconImage = document.createElement("i");
+    socialIconImage.classList.add("fab", `fa-${button.icon.toLowerCase()}`);
+
+    socialIcon.appendChild(socialIconImage);
+    socialIcons.appendChild(socialIcon);
+  });
+
+  const donateData = commonData.footer.donationButton;
+
+  const donateBanner = document.createElement("a");
+  donateBanner.className = "donate-banner";
+  donateBanner.textContent = donateData.translations[locale];
+  donateBanner.setAttribute("href", donateData.reference);
+  donateBanner.setAttribute("title", donateData.translations[locale]);
+
+  const donateImage = document.createElement("i");
+  donateImage.classList.add("fas", `fa-${donateData.icon.toLowerCase()}`);
+  donateBanner.appendChild(donateImage);
+
+  const developerData = commonData.footer.developerButton;
+
+  const developerInfo = document.createElement("div");
+  developerInfo.className = "developer-info";
+  developerInfo.textContent = (developerData.translations[locale] + " ");
+
+  const developerLink = document.createElement("a");
+  developerLink.setAttribute("href", developerData.reference);
+  developerLink.setAttribute("title", developerData.translations[locale] + " " + developerData.name);
+  developerLink.textContent = developerData.name;
+  developerInfo.appendChild(developerLink);
+
+  footer.appendChild(socialIcons);
+  footer.appendChild(donateBanner);
+  footer.appendChild(developerInfo);
+  mainContent.appendChild(footer);
+}
+
+function updateFooter(locale) {
+  const socialIcons = document.querySelectorAll(".social-icon");
+  const donateBanner = document.querySelector(".donate-banner");
+  const developerInfo = document.querySelector(".developer-info");
+
+  commonData.footer.socialButtons.forEach((button, index) => {
+    socialIcons[index].setAttribute("title", button.translations[locale]);
+  });
+
+  const donateData = commonData.footer.donationButton;
+  donateBanner.textContent = donateData.translations[locale];
+  donateBanner.setAttribute("title", donateData.translations[locale]);
+
+  const donateImage = document.createElement("i");
+  donateImage.classList.add("fas", `fa-${donateData.icon.toLowerCase()}`);
+  donateBanner.appendChild(donateImage);
+
+  const developerData = commonData.footer.developerButton;
+  developerInfo.textContent = (developerData.translations[locale] + " ");
+
+  const developerLink = document.createElement("a");
+  developerLink.setAttribute("href", developerData.reference);
+  developerLink.setAttribute("title", developerData.translations[locale] + " " + developerData.name);
+  developerLink.textContent = developerData.name;
+  developerInfo.appendChild(developerLink);
+}
+
 function createLoadingScreen() {
   const mainContent = document.getElementById("content");
   const loaderContainer = document.createElement("div");
@@ -85,6 +163,7 @@ function createLoadingScreen() {
 function updateLang(locale) {
   updateNavbar(locale);
   toggleTheme(localStorage.getItem("currentTheme"));
+  updateFooter(locale);
   localStorage.setItem("currentLocale", locale);
 }
 

@@ -208,6 +208,18 @@ const data = {
         }
       },
       {
+        id: "about",
+        reference: "./about.html",
+        icon: "anchor",
+        hrAfter: false,
+        translations: {
+          es: "Proyecto Warships Wiki",
+          en: "Warships Wiki Project",
+          pt: "Projeto Warships Wiki",
+          ru: "Военные корабли Вики Проекта"
+        }
+      },
+      {
         id: "faq",
         reference: "./faq.html",
         icon: "question",
@@ -219,7 +231,101 @@ const data = {
           ru: "Часто задаваемые вопросы"
         }
       },
+      {
+        id: "our-team",
+        reference: "./our-team.html",
+        icon: "people-group",
+        hrAfter: false,
+        translations: {
+          "es": "Nuestros integrantes",
+          "en": "Our Team",
+          "pt": "Nossa Equipe",
+          "ru": "Наша команда"
+        }
+      },
+      {
+        id: "collaborators",
+        reference: "./collaborators.html",
+        icon: "user-pen",
+        hrAfter: false,
+        translations: {
+          "es": "Nuestros colaboradores",
+          "en": "Our Collaborators",
+          "pt": "Nossos Colaboradores",
+          "ru": "Наши соавторы"
+        }
+      },
+      {
+        id: "partners",
+        reference: "./partners.html",
+        icon: "handshake",
+        hrAfter: true,
+        translations: {
+          "es": "Vuestras colaboraciones",
+          "en": "Your Contributions",
+          "pt": "Suas Contribuições",
+          "ru": "Ваши вклады"
+        }
+      }
     ],
+  footer: {
+    donationButton: {
+      id: "donation",
+      reference: "#",
+      icon: "hand-holding-dollar",
+      translations: {
+        "es": "Donaciones",
+        "en": "Donations",
+        "pt": "Doações",
+        "ru": "Пожертвования"
+      }
+    },
+    socialButtons: [
+      {
+        id: "twitter",
+        reference: "#",
+        icon: "twitter",
+        translations: {
+          "es": "Twitter",
+          "en": "Twitter",
+          "pt": "Twitter",
+          "ru": "Твиттер"
+        }
+      },
+      {
+        id: "facebook",
+        reference: "#",
+        icon: "facebook",
+        translations: {
+          "es": "Facebook",
+          "en": "Facebook",
+          "pt": "Facebook",
+          "ru": "Фейсбук"
+        }
+      },
+      {
+        id: "instagram",
+        reference: "#",
+        icon: "instagram",
+        translations: {
+          "es": "Instagram",
+          "en": "Instagram",
+          "pt": "Instagram",
+          "ru": "Инстаграм"
+        }
+      }
+    ], developerButton: {
+      name: "Facundo 'Pastruken' Fernandez",
+      reference: "#",
+      translations: {
+        "es": "Sitio web desarrollado por",
+        "en": "Website developed by",
+        "pt": "Site desenvolvido por",
+        "ru": "Сайт разработан"
+      }
+    }
+  }
 };
+
 
 export { data };
