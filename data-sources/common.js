@@ -201,10 +201,10 @@ const data = {
         icon: "calculator",
         hrAfter: true,
         translations: {
-          es: "Calculadora",
-          en: "Calculator",
-          pt: "Calculadora",
-          ru: "Калькулятор"
+          es: "Cálculos",
+          en: "Calculations",
+          pt: "Cálculos",
+          ru: "Расчеты"
         }
       },
       {
