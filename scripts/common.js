@@ -34,7 +34,7 @@ function createNavbar(theme, locale) {
     } else if (!button.disabled) {
       var href = button.reference.toLowerCase();
       if (currentPath.includes("/")) {
-        var depth = currentPath.split("/").length - ((currentPath.split("/")[1] === "warships-wiki") ? 1 : 2);
+        var depth = currentPath.split("/").length - ((currentPath.split("/")[1] === "warships-wiki") ? 3 : 2);
         var backPath = "";
         for (var i = 0; i < depth; i++) {
           backPath += "../";
