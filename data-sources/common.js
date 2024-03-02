@@ -44,6 +44,7 @@ const data = {
         reference: "./index.html",
         icon: "home",
         hrAfter: true,
+        disabled: false,
         translations: {
           es: "Inicio",
           en: "Home",
@@ -56,6 +57,7 @@ const data = {
         reference: "./armies.html",
         icon: "person-military-rifle",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Armadas",
           en: "Armies",
@@ -68,6 +70,7 @@ const data = {
         reference: "./aircraft.html",
         icon: "jet-fighter-up",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Aeronaves",
           en: "Aircraft",
@@ -80,6 +83,7 @@ const data = {
         reference: "./warships.html",
         icon: "ship",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Buques",
           en: "Warships",
@@ -92,6 +96,7 @@ const data = {
         reference: "./armaments.html",
         icon: "gun",
         hrAfter: true,
+        disabled: true,
         translations: {
           es: "Armamentos",
           en: "Armaments",
@@ -104,6 +109,7 @@ const data = {
         reference: "./technologies.html",
         icon: "microchip",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Tecnologías",
           en: "Technologies",
@@ -116,6 +122,7 @@ const data = {
         reference: "./policies.html",
         icon: "landmark",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Políticas Navales",
           en: "Naval Policies",
@@ -128,6 +135,7 @@ const data = {
         reference: "./terms.html",
         icon: "spell-check",
         hrAfter: true,
+        disabled: true,
         translations: {
           es: "Terminologías",
           en: "Terminologies",
@@ -140,6 +148,7 @@ const data = {
         reference: "./cinema.html",
         icon: "film",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Cinematografía y Música",
           en: "Cinematography & Music",
@@ -152,6 +161,7 @@ const data = {
         reference: "./gaming.html",
         icon: "gamepad",
         hrAfter: true,
+        disabled: true,
         translations: {
           es: "Videojuegos",
           en: "Gaming",
@@ -164,6 +174,7 @@ const data = {
         reference: "./misc.html",
         icon: "shuffle",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Misceláneos",
           en: "Miscellaneous",
@@ -176,6 +187,7 @@ const data = {
         reference: "./docs.html",
         icon: "file",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Documentación",
           en: "Documentation",
@@ -188,6 +200,7 @@ const data = {
         reference: "./links.html",
         icon: "link",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Enlaces Destacados",
           en: "Featured Links",
@@ -200,6 +213,7 @@ const data = {
         reference: "./calculations.html",
         icon: "calculator",
         hrAfter: true,
+        disabled: false,
         translations: {
           es: "Cálculos",
           en: "Calculations",
@@ -212,6 +226,7 @@ const data = {
         reference: "./about.html",
         icon: "anchor",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Proyecto Warships Wiki",
           en: "Warships Wiki Project",
@@ -224,6 +239,7 @@ const data = {
         reference: "./faq.html",
         icon: "question",
         hrAfter: false,
+        disabled: true,
         translations: {
           es: "Preguntas Frecuentes",
           en: "Frequently Asked Questions",
@@ -236,6 +252,7 @@ const data = {
         reference: "./our-team.html",
         icon: "people-group",
         hrAfter: false,
+        disabled: true,
         translations: {
           "es": "Nuestros integrantes",
           "en": "Our Team",
@@ -248,6 +265,7 @@ const data = {
         reference: "./collaborators.html",
         icon: "user-pen",
         hrAfter: false,
+        disabled: true,
         translations: {
           "es": "Nuestros colaboradores",
           "en": "Our Collaborators",
@@ -260,6 +278,7 @@ const data = {
         reference: "./partners.html",
         icon: "handshake",
         hrAfter: true,
+        disabled: true,
         translations: {
           "es": "Vuestras colaboraciones",
           "en": "Your Contributions",

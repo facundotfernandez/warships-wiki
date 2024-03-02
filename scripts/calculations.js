@@ -1,12 +1,12 @@
 import { data as unitsData } from "../data-sources/calculations.js";
-const converterContainer = document.getElementById('calculations');
+const convertersContainer = document.getElementById('calculations');
 
 async function initConverters() {
     try {
         let currentLocale = localStorage.getItem("currentLocale");
         for (let i = 0; i < 3; i++) {
             unitsData.converterTypes.forEach(async unitType => {
-                await generateConverterCard(unitType, currentLocale);
+                await generateConverterCard(unitType, currentLocale, i);
             });
         }
         await addListenerUpdateLang();
@@ -16,7 +16,7 @@ async function initConverters() {
     }
 }
 
-async function generateConverterCard(unitType, locale) {
+async function generateConverterCard(unitType, locale, converterIndex) {
     const defaultName = unitType.name["en"].toLowerCase();
 
     const card = document.createElement("div");
@@ -28,6 +28,8 @@ async function generateConverterCard(unitType, locale) {
     cardHeader.setAttribute("data-unit-name", defaultName.toLowerCase());
 
     const icon = document.createElement("i");
+    icon.setAttribute("role", "img");
+    icon.setAttribute("aria-label", unitType.name[locale]);
     icon.classList.add("fas", `fa-${unitType.icon.toLowerCase()}`);
 
     const form = document.createElement("form");
@@ -38,17 +40,17 @@ async function generateConverterCard(unitType, locale) {
 
     const inputLabel = document.createElement("label");
     inputLabel.textContent = unitsData.placeholders.input[locale];
-    inputLabel.setAttribute("for", `${defaultName}-value-input`);
+    inputLabel.setAttribute("for", `${defaultName}-value-input-${converterIndex}`);
 
     const inputValue = document.createElement("input");
     inputValue.type = "number";
     inputValue.placeholder = unitsData.placeholders.input[locale];
     inputValue.classList.add("input-value");
-    inputValue.id = `${defaultName}-value-input`;
+    inputValue.id = `${defaultName}-value-input-${converterIndex}`;
 
     const selectFrom = createSelect(unitType.units.en, unitType.units[locale]);
     selectFrom.setAttribute("title", unitsData.placeholders.inputSelect[locale]);
-    selectFrom.id = `${defaultName}-select-from`;
+    selectFrom.id = `${defaultName}-select-from-${converterIndex}`;
     selectFrom.name = `${defaultName}-select-from`;
 
     inputGroup.appendChild(inputLabel);
@@ -61,18 +63,18 @@ async function generateConverterCard(unitType, locale) {
 
     const outputLabel = document.createElement("label");
     outputLabel.textContent = unitsData.placeholders.output[locale];
-    outputLabel.setAttribute("for", `${defaultName}-result-output`);
+    outputLabel.setAttribute("for", `${defaultName}-result-output-${converterIndex}`);
 
     const outputValue = document.createElement("input");
     outputValue.type = "text";
     outputValue.placeholder = unitsData.placeholders.output[locale];
     outputValue.readOnly = true;
     outputValue.classList.add("output-value");
-    outputValue.id = `${defaultName}-result-output`;
+    outputValue.id = `${defaultName}-result-output-${converterIndex}`;
 
     const selectTo = createSelect(unitType.units.en, unitType.units[locale]);
     selectTo.setAttribute("title", unitsData.placeholders.outputSelect[locale]);
-    selectTo.id = `${defaultName}-select-to`;
+    selectTo.id = `${defaultName}-select-to-${converterIndex}`;
     selectTo.name = `${defaultName}-select-to`;
 
     outputGroup.appendChild(outputLabel);
@@ -97,7 +99,7 @@ async function generateConverterCard(unitType, locale) {
         calculateConversion(inputValue.value, selectFrom.value, selectTo.value, outputValue, unitType.conversions);
     });
 
-    converterContainer.appendChild(card);
+    convertersContainer.appendChild(card);
 }
 
 function createSelect(defaultUnits, localizedUnits) {
@@ -132,20 +134,20 @@ function calculateConversion(value, fromUnit, toUnit, output, conversions) {
 }
 
 function updateLang(locale) {
-    const calculationsContainer = document.getElementById('calculations');
 
-    const cardHeaders = calculationsContainer.querySelectorAll('.card-header');
+    const cardHeaders = convertersContainer.querySelectorAll('.card-header');
     cardHeaders.forEach(header => {
         let unitName = header.dataset.unitName.toLowerCase();
         let unitType = unitsData.converterTypes.find(unitType => unitType.name.en.toLowerCase() === unitName);
         header.textContent = unitType.name[locale];
 
         let icon = document.createElement("i");
+        icon.setAttribute("aria-label", unitType.name[locale]);
         icon.classList.add("fas", `fa-${unitType.icon.toLowerCase()}`);
         header.appendChild(icon);
     });
 
-    const inputGroups = calculationsContainer.querySelectorAll('.input-group');
+    const inputGroups = convertersContainer.querySelectorAll('.input-group');
     inputGroups.forEach(inputGroup => {
         let unitName = inputGroup.dataset.unitName.toLowerCase();
         let unitType = unitsData.converterTypes.find(unitType => unitType.name.en.toLowerCase() === unitName);
@@ -167,7 +169,7 @@ function updateLang(locale) {
         });
     });
 
-    const outputGroups = calculationsContainer.querySelectorAll('.output-group');
+    const outputGroups = convertersContainer.querySelectorAll('.output-group');
     outputGroups.forEach(outputGroup => {
         let unitName = outputGroup.dataset.unitName.toLowerCase();
         let unitType = unitsData.converterTypes.find(unitType => unitType.name.en.toLowerCase() === unitName);

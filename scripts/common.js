@@ -31,10 +31,20 @@ function createNavbar(theme, locale) {
     buttonContainer.setAttribute("data-button-id", button.id.toLowerCase());
     if ((currentPath.endsWith("/" + button.id + ".html")) || (isIndexPath && button.id === "index")) {
       buttonContainer.setAttribute("href", "#top");
-    } else if (button.id === "calculations" || button.id === "index") {
-      buttonContainer.setAttribute("href", button.reference.toLowerCase());
+    } else if (!button.disabled) {
+      var href = button.reference.toLowerCase();
+      if (currentPath.includes("/")) {
+        var depth = currentPath.split("/").length - 2;
+        var backPath = "";
+        for (var i = 0; i < depth; i++) {
+          backPath += "../";
+        }
+        href = backPath + href;
+      }
+      buttonContainer.setAttribute("href", href);
     }
     buttonIcon.classList.add("fas", `fa-${button.icon.toLowerCase()}`);
+    buttonIcon.setAttribute("role", "img");
     buttonIcon.setAttribute("aria-label", button.translations[locale]);
     buttonTooltip.innerHTML = button.translations[locale];
 
@@ -57,6 +67,7 @@ function updateNavbar(locale) {
     let buttonIcon = buttonContainer.querySelector("i");
     let buttonTooltip = buttonContainer.querySelector("span");
     if (buttonContainer) {
+      buttonIcon.setAttribute("role", "img");
       buttonIcon.setAttribute("aria-label", button.translations[locale]);
       buttonTooltip.innerHTML = button.translations[locale];
     }
@@ -78,6 +89,8 @@ function createFooter(locale) {
     socialIcon.className = "social-icon";
 
     let socialIconImage = document.createElement("i");
+    socialIconImage.setAttribute("role", "img");
+    socialIconImage.setAttribute("aria-label", button.translations[locale]);
     socialIconImage.classList.add("fab", `fa-${button.icon.toLowerCase()}`);
 
     socialIcon.appendChild(socialIconImage);
@@ -93,6 +106,8 @@ function createFooter(locale) {
   donateBanner.setAttribute("title", donateData.translations[locale]);
 
   const donateImage = document.createElement("i");
+  donateImage.setAttribute("role", "img");
+  donateImage.setAttribute("aria-label", donateData.translations[locale]);
   donateImage.classList.add("fas", `fa-${donateData.icon.toLowerCase()}`);
   donateBanner.appendChild(donateImage);
 
@@ -174,6 +189,8 @@ function createLangSelector(locale) {
 
   container.classList.add("nav-button");
   container.setAttribute("id", "lang-selector");
+  containerIcon.setAttribute("role", "img");
+  containerIcon.setAttribute("aria-label", "Lang selector");
   containerOptions.classList.add("lang-options");
   navbar.appendChild(container);
   container.appendChild(containerIcon);
@@ -194,6 +211,8 @@ function updateLangSelector(locale) {
   for (let lang in commonData.locales) {
     if ((lang !== "default") && (lang !== locale)) {
       let langOption = document.createElement("i");
+      langOption.setAttribute("role", "img");
+      langOption.setAttribute("aria-label", commonData.locales[lang].name);
       langOption.classList.add("lang-option", "fi", "fi-" + commonData.locales[lang].icon, "fis");
       langOption.setAttribute("data-lang-id", commonData.locales[lang].id);
       containerOptions.appendChild(langOption);
@@ -212,6 +231,7 @@ function createThemeToggle(theme) {
 
   container.classList.add("nav-button");
   container.setAttribute("id", "theme-toggle");
+  icon.setAttribute("role", "img");
 
   navbar.appendChild(container);
   container.appendChild(icon);

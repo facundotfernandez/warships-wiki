@@ -1,0 +1,139 @@
+:root {
+    --app-background-color: #333333;
+    --card-wave-color: #009b3a80;
+	--arg-wave-color: #009b3a;
+    --card-wave-shadow-color: #9ab6d6;
+    --intro-background-duration: 6s;
+    --intro-card-duration: 4s;
+    --intro-wave-duration: 7s;
+    --wave-infinite-duration: 15s;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+	font-family: Calibri;
+}
+
+body {
+    background-color: var(--darkest-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    width: 200px;
+    height: 50px;
+    background-image: var(--card-background);
+    border-radius: 12px;
+    overflow: hidden;
+	cursor: pointer;
+}
+
+.card:hover {
+	box-shadow: 0px 0px 8px 2px var(--card-wave-color);
+}
+
+.card-wave {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: inset 0px 0px 8px 2px var(--card-wave-color);
+    background-color: var(--card-wave-color);
+    animation: var(--wave-infinite-duration) card-wave-move infinite linear forwards;
+}
+
+.card-wave:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: 40%;
+    left: 50%;
+    margin-left: -200px;
+    width: 400px;
+    height: 400px;
+    border-radius: 40%;
+    background-color: var(--arg-wave-color);
+}
+
+.card-title {
+    position: relative;
+    z-index: 2;
+    font-size: 2rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+@keyframes card-wave-move {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes intro-card-animation {
+    0% {
+        opacity: 0;
+        transform: translate(0, -50%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0%);
+    }
+}
+
+@keyframes intro-main-background {
+    from {
+        background-color: #333c47;
+    }
+
+    to {
+        background-color: #22282f;
+    }
+}
+
+@keyframes intro-wave-animation {
+    from {
+        transform: translateY(50%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+body {
+    animation: var(--intro-background-duration) intro-main-background forwards;
+}
+
+.card {
+    animation: var(--intro-card-duration) intro-card-animation forwards;
+}
+
+.card-wave {
+    animation: var(--intro-wave-duration) intro-wave-animation;
+}
+
+.card-wave:before {
+    animation: var(--wave-infinite-duration) card-wave-move infinite linear forwards;
+}
