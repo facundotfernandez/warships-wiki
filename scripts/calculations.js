@@ -1,15 +1,16 @@
 import { data as unitsData } from "../data-sources/calculations.js";
+
 const convertersContainer = document.getElementById('calculations');
 
 async function initConverters() {
     try {
         let currentLocale = localStorage.getItem("currentLocale");
         for (let i = 0; i < 3; i++) {
-            unitsData.converterTypes.forEach(async unitType => {
+            for (const unitType of unitsData.converterTypes) {
                 await generateConverterCard(unitType, currentLocale, i);
-            });
+            }
         }
-        await addListenerUpdateLang();
+        addListenerUpdateLang();
     } catch (error) {
         console.error("Error loading converters: ", error);
         throw error;
@@ -23,7 +24,7 @@ async function generateConverterCard(unitType, locale, converterIndex) {
     card.classList.add("card");
 
     const cardHeader = document.createElement("div");
-    cardHeader.classList.add("card-header");
+    cardHeader.classList.add("card-header", "flex-m");
     cardHeader.textContent = unitType.name[locale];
     cardHeader.setAttribute("data-unit-name", defaultName.toLowerCase());
 
@@ -33,9 +34,10 @@ async function generateConverterCard(unitType, locale, converterIndex) {
     icon.classList.add("fas", `fa-${unitType.icon.toLowerCase()}`);
 
     const form = document.createElement("form");
+    form.classList.add("flex-m");
 
     const inputGroup = document.createElement("div");
-    inputGroup.classList.add("input-group");
+    inputGroup.classList.add("input-group", "flex-m");
     inputGroup.setAttribute("data-unit-name", defaultName.toLowerCase());
 
     const inputLabel = document.createElement("label");
@@ -58,7 +60,7 @@ async function generateConverterCard(unitType, locale, converterIndex) {
     inputGroup.appendChild(selectFrom);
 
     const outputGroup = document.createElement("div");
-    outputGroup.classList.add("output-group");
+    outputGroup.classList.add("output-group", "flex-m");
     outputGroup.setAttribute("data-unit-name", defaultName.toLowerCase());
 
     const outputLabel = document.createElement("label");
@@ -116,15 +118,12 @@ function createSelect(defaultUnits, localizedUnits) {
 
             select.appendChild(option);
         });
-    } else {
-        console.log(defaultUnits);
-        console.log(localizedUnits);
     }
     return select;
 }
 
 function calculateConversion(value, fromUnit, toUnit, output, conversions) {
-    if (!isNaN(value)) {
+    if ((!isNaN(value) && value !== '')) {
         let baseValue = value * conversions[fromUnit].toMain;
         let result = baseValue * conversions[toUnit].fromMain;
         output.value = (Number.isInteger(result)) ? result.toFixed(0) : result.toFixed(3);
@@ -192,9 +191,9 @@ function updateLang(locale) {
     });
 
     addListenerUpdateLang();
-};
+}
 
-async function addListenerUpdateLang() {
+function addListenerUpdateLang() {
     const langOptions = document.querySelectorAll('.lang-option');
     langOptions.forEach(langOption => {
         langOption.addEventListener("click", function () {

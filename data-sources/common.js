@@ -35,13 +35,13 @@ const data = {
       id: "ru",
       name: "Русский",
       icon: "ru",
-    },
+    }
   },
   navbarButtons:
     [
       {
         id: "index",
-        reference: "./index.html",
+        reference: "",
         icon: "home",
         hrAfter: true,
         disabled: false,
@@ -54,7 +54,7 @@ const data = {
       },
       {
         id: "armies",
-        reference: "./armies.html",
+        reference: "armies.html",
         icon: "person-military-rifle",
         hrAfter: false,
         disabled: true,
@@ -67,7 +67,7 @@ const data = {
       },
       {
         id: "aircraft",
-        reference: "./aircraft.html",
+        reference: "aircraft.html",
         icon: "jet-fighter-up",
         hrAfter: false,
         disabled: true,
@@ -80,10 +80,10 @@ const data = {
       },
       {
         id: "warships",
-        reference: "./warships.html",
+        reference: "warships.html",
         icon: "ship",
         hrAfter: false,
-        disabled: true,
+        disabled: false,
         translations: {
           es: "Buques",
           en: "Warships",
@@ -93,7 +93,7 @@ const data = {
       },
       {
         id: "armaments",
-        reference: "./armaments.html",
+        reference: "armaments.html",
         icon: "gun",
         hrAfter: true,
         disabled: true,
@@ -106,7 +106,7 @@ const data = {
       },
       {
         id: "technologies",
-        reference: "./technologies.html",
+        reference: "technologies.html",
         icon: "microchip",
         hrAfter: false,
         disabled: true,
@@ -119,7 +119,7 @@ const data = {
       },
       {
         id: "policies",
-        reference: "./policies.html",
+        reference: "policies.html",
         icon: "landmark",
         hrAfter: false,
         disabled: true,
@@ -132,7 +132,7 @@ const data = {
       },
       {
         id: "terms",
-        reference: "./terms.html",
+        reference: "terms.html",
         icon: "spell-check",
         hrAfter: true,
         disabled: true,
@@ -145,7 +145,7 @@ const data = {
       },
       {
         id: "cinema",
-        reference: "./cinema.html",
+        reference: "cinema.html",
         icon: "film",
         hrAfter: false,
         disabled: true,
@@ -158,7 +158,7 @@ const data = {
       },
       {
         id: "gaming",
-        reference: "./gaming.html",
+        reference: "gaming.html",
         icon: "gamepad",
         hrAfter: true,
         disabled: true,
@@ -171,7 +171,7 @@ const data = {
       },
       {
         id: "misc",
-        reference: "./misc.html",
+        reference: "misc.html",
         icon: "shuffle",
         hrAfter: false,
         disabled: true,
@@ -184,7 +184,7 @@ const data = {
       },
       {
         id: "docs",
-        reference: "./docs.html",
+        reference: "docs.html",
         icon: "file",
         hrAfter: false,
         disabled: true,
@@ -197,7 +197,7 @@ const data = {
       },
       {
         id: "links",
-        reference: "./links.html",
+        reference: "links.html",
         icon: "link",
         hrAfter: false,
         disabled: true,
@@ -210,7 +210,7 @@ const data = {
       },
       {
         id: "calculations",
-        reference: "./calculations.html",
+        reference: "calculations.html",
         icon: "calculator",
         hrAfter: true,
         disabled: false,
@@ -223,7 +223,7 @@ const data = {
       },
       {
         id: "about",
-        reference: "./about.html",
+        reference: "about.html",
         icon: "anchor",
         hrAfter: false,
         disabled: true,
@@ -236,7 +236,7 @@ const data = {
       },
       {
         id: "faq",
-        reference: "./faq.html",
+        reference: "faq.html",
         icon: "question",
         hrAfter: false,
         disabled: true,
@@ -249,7 +249,7 @@ const data = {
       },
       {
         id: "our-team",
-        reference: "./our-team.html",
+        reference: "our-team.html",
         icon: "people-group",
         hrAfter: false,
         disabled: true,
@@ -262,7 +262,7 @@ const data = {
       },
       {
         id: "collaborators",
-        reference: "./collaborators.html",
+        reference: "collaborators.html",
         icon: "user-pen",
         hrAfter: false,
         disabled: true,
@@ -275,7 +275,7 @@ const data = {
       },
       {
         id: "partners",
-        reference: "./partners.html",
+        reference: "partners.html",
         icon: "handshake",
         hrAfter: true,
         disabled: true,
@@ -287,6 +287,9 @@ const data = {
         }
       }
     ],
+  header: {
+    title: "Warships Wiki"
+  },
   footer: {
     donationButton: {
       id: "donation",

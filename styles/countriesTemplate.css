@@ -1,4 +1,4 @@
-:root {
+/*:root {
     --app-background-color: #333333;
     --card-wave-color: #009b3a80;
 	--arg-wave-color: #009b3a;
@@ -137,3 +137,4 @@ body {
 .card-wave:before {
     animation: var(--wave-infinite-duration) card-wave-move infinite linear forwards;
 }
+*/

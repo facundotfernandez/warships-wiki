@@ -35,7 +35,7 @@ const data = {
                 es: ['Kilómetro', 'Metro', 'Centímetro', 'Milímetro', 'Micrómetro', 'Nanómetro', 'Milla', 'Yarda', 'Pie', 'Pulgada', 'Milla náutica'],
                 en: ['Kilometre', 'Metre', 'Centimetre', 'Millimetre', 'Micrometre', 'Nanometre', 'Mile', 'Yard', 'Foot', 'Inch', 'Nautical mile'],
                 pt: ['Quilômetro', 'Metro', 'Centímetro', 'Milímetro', 'Micrômetro', 'Nanômetro', 'Milha', 'Jarda', 'Pé', 'Polegada', 'Milha náutica'],
-                ru: ['Километр', 'Метр', 'Сантиметр', 'Миллиметр', 'Микрометр', 'Нанометр', 'Миля', 'Ярд', 'Фут', 'Дюйм', 'Морская миля'],
+                ru: ['Километр', 'Метр', 'Сантиметр', 'Миллиметр', 'Микрометр', 'Манометр', 'Миля', 'Ярд', 'Фут', 'Дюйм', 'Морская миля'],
             },
             conversions: {
                 'kilometre': { toMain: 1000, fromMain: 0.001 },
