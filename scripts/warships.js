@@ -4,7 +4,7 @@ async function initCountriesPage() {
     try {
         let currentLocale = localStorage.getItem("currentLocale");
         createCountryCards(countriesData.countries, currentLocale);
-        addListenerUpdateLang();
+        await addListenerUpdateLang();
     } catch (error) {
         console.error("Error loading converters: ", error);
         throw error;
@@ -51,19 +51,19 @@ function createCountryCard(data, locale) {
     return card;
 }
 
-function updateLang(locale) {
+async function updateLang(locale) {
     const countriesTitle = document.querySelectorAll('.card-title');
     countriesTitle.forEach((cardTitle, index) => {
         cardTitle.textContent = countriesData.countries[index].translations[locale];
-        addListenerUpdateLang();
     });
+    addListenerUpdateLang();
 }
 
-function addListenerUpdateLang() {
+async function addListenerUpdateLang() {
     const langOptions = document.querySelectorAll('.lang-option');
     langOptions.forEach(langOption => {
-        langOption.addEventListener("click", function () {
-            updateLang(langOption.dataset.langId);
+        langOption.addEventListener("click", async function () {
+            await updateLang(langOption.dataset.langId);
         });
     });
 }
