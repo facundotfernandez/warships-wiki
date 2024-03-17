@@ -161,12 +161,12 @@ function getPathDepth(root, length) {
 }
 
 function updateTitle(locale) {
-    const viewId = getCurrentView(window.location.pathname).slice(0, -5);
+    /*const viewId = getCurrentView(window.location.pathname).slice(0, -5);
     if (viewId === "") document.title = commonData.views[0].translations[locale];
     else {
         const view = commonData.views.find(view => view.id === viewId);
         //document.title = view.translations[locale];
-    }
+    }*/
 }
 
 function createHeaderBanner(locale) {
