@@ -1,0 +1,53 @@
+:root {
+    --accent-color: #016eba;
+    --lightest-color: #e0f0fe;
+    --lighter-color: #bae1fd;
+    --light-color: #7ccafd;
+    --dark-color: #025ea2;
+    --darker-color: #0c436e;
+    --darkest-color: #082a49;
+
+    --nav-bar-w: calc(var(--nav-tooltip-w) + var(--nav-button-w));
+    --nav-button-h: 54px;
+    --nav-button-w: var(--nav-button-h);
+    --nav-tooltip-w: calc(var(--nav-button-w) * 3);
+
+    --border-r: 1rem;
+    --transition-duration: 0.3s;
+}
+
+.light-theme {
+    --darkest-color: #e0f0fe;
+    --darker-color: #bae1fd;
+    --dark-color: #7ccafd;
+    --light-color: #025ea2;
+    --lighter-color: #0c436e;
+    --lightest-color: #082a49;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Calibri, sans-serif;
+}
+
+.flex-m,
+.flex-m-children *:not(.flex-m-children) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-ff-force {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.disable-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

@@ -1,13 +1,17 @@
 import { data as unitsData } from "../data-sources/calculations.js";
 
-const convertersContainer = document.getElementById('calculations');
+document.addEventListener("DOMContentLoaded", async function () {
+    let currentLocale = localStorage.getItem("currentLocale");
+    await createBasicStructure(document.querySelector("section"), currentLocale);
+    await initConverters(document.getElementById('calculations'));
+});
 
-async function initConverters() {
+async function initConverters(container) {
     try {
         let currentLocale = localStorage.getItem("currentLocale");
         for (let i = 0; i < 3; i++) {
             for (const unitType of unitsData.converterTypes) {
-                await generateConverterCard(unitType, currentLocale, i);
+                generateCommonConverterCard(container, unitType, currentLocale, i);
             }
         }
         addListenerUpdateLang();
@@ -17,21 +21,33 @@ async function initConverters() {
     }
 }
 
-async function generateConverterCard(unitType, locale, converterIndex) {
+async function createBasicStructure(container, locale) {
+    await createConvertersContainer(container, locale);
+}
+
+async function createConvertersContainer(parentContainer, locale) {
+    const parentHeader = document.createElement("h2");
+    parentHeader.setAttribute("id", "section-header");
+    parentHeader.classList.add("section-header");
+    parentHeader.textContent = "Converters";
+
+    const converters = document.createElement("article");
+    converters.setAttribute("id", "calculations");
+    converters.classList.add("calculations");
+
+    parentContainer.append(parentHeader, converters);
+}
+
+function generateCommonConverterCard(container, unitType, locale, converterIndex) {
     const defaultName = unitType.name["en"].toLowerCase();
 
     const card = document.createElement("div");
     card.classList.add("card");
 
-    const cardHeader = document.createElement("div");
-    cardHeader.classList.add("card-header", "flex-m");
-    cardHeader.textContent = unitType.name[locale];
-    cardHeader.setAttribute("data-unit-name", defaultName.toLowerCase());
-
-    const icon = document.createElement("i");
-    icon.setAttribute("role", "img");
-    icon.setAttribute("aria-label", unitType.name[locale]);
-    icon.classList.add("fas", `fa-${unitType.icon.toLowerCase()}`);
+    const header = document.createElement("header");
+    header.classList.add("card-header", "flex-m");
+    header.textContent = unitType.name[locale];
+    header.setAttribute("data-unit-name", defaultName.toLowerCase());
 
     const form = document.createElement("form");
     form.classList.add("flex-m");
@@ -83,10 +99,9 @@ async function generateConverterCard(unitType, locale, converterIndex) {
     outputGroup.appendChild(outputValue);
     outputGroup.appendChild(selectTo);
 
-    cardHeader.appendChild(icon);
     form.appendChild(inputGroup);
     form.appendChild(outputGroup);
-    card.appendChild(cardHeader);
+    card.appendChild(header);
     card.appendChild(form);
 
     inputValue.addEventListener('input', () => {
@@ -101,7 +116,7 @@ async function generateConverterCard(unitType, locale, converterIndex) {
         calculateConversion(inputValue.value, selectFrom.value, selectTo.value, outputValue, unitType.conversions);
     });
 
-    convertersContainer.appendChild(card);
+    container.appendChild(card);
 }
 
 function createSelect(defaultUnits, localizedUnits) {
@@ -134,19 +149,16 @@ function calculateConversion(value, fromUnit, toUnit, output, conversions) {
 
 function updateLang(locale) {
 
-    const cardHeaders = convertersContainer.querySelectorAll('.card-header');
+    const containers = document.getElementById('calculations');
+
+    const cardHeaders = containers.querySelectorAll('.card header');
     cardHeaders.forEach(header => {
         let unitName = header.dataset.unitName.toLowerCase();
         let unitType = unitsData.converterTypes.find(unitType => unitType.name.en.toLowerCase() === unitName);
         header.textContent = unitType.name[locale];
-
-        let icon = document.createElement("i");
-        icon.setAttribute("aria-label", unitType.name[locale]);
-        icon.classList.add("fas", `fa-${unitType.icon.toLowerCase()}`);
-        header.appendChild(icon);
     });
 
-    const inputGroups = convertersContainer.querySelectorAll('.input-group');
+    const inputGroups = containers.querySelectorAll('.card .input-group');
     inputGroups.forEach(inputGroup => {
         let unitName = inputGroup.dataset.unitName.toLowerCase();
         let unitType = unitsData.converterTypes.find(unitType => unitType.name.en.toLowerCase() === unitName);
@@ -168,7 +180,7 @@ function updateLang(locale) {
         });
     });
 
-    const outputGroups = convertersContainer.querySelectorAll('.output-group');
+    const outputGroups = containers.querySelectorAll('.card .output-group');
     outputGroups.forEach(outputGroup => {
         let unitName = outputGroup.dataset.unitName.toLowerCase();
         let unitType = unitsData.converterTypes.find(unitType => unitType.name.en.toLowerCase() === unitName);
@@ -201,5 +213,3 @@ function addListenerUpdateLang() {
         });
     });
 }
-
-await initConverters();

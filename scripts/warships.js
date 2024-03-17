@@ -1,20 +1,50 @@
-import { data as countriesData } from "../data-sources/warships.js";
+import {data as countriesData} from "../data-sources/countries.js";
+
+document.addEventListener("DOMContentLoaded", async function () {
+    await initCountriesPage();
+    await addListenerUpdateLang();
+});
 
 async function initCountriesPage() {
     try {
         let currentLocale = localStorage.getItem("currentLocale");
-        createCountryCards(countriesData.countries, currentLocale);
-        await addListenerUpdateLang();
+        await createBasicStructure(document.querySelector("section"), currentLocale);
+        await createCountryCards(countriesData, currentLocale);
     } catch (error) {
-        console.error("Error loading converters: ", error);
+        console.error("Error loading warships page: ", error);
         throw error;
     }
 }
 
-function createCountryCards(data, locale) {
+async function createBasicStructure(container, locale) {
+    await createCountriesContainer(container, locale);
+}
+
+async function createCountriesContainer(parentContainer, locale) {
+    const parentHeader = document.createElement("h2");
+    parentHeader.setAttribute("id", "section-header");
+    parentHeader.classList.add("section-header");
+    parentHeader.textContent = "Countries";
+
+    const countries = document.createElement("article");
+    countries.setAttribute("id", "countries");
+    countries.classList.add("countries");
+
+    parentContainer.append(parentHeader, countries);
+}
+
+async function createCountryCards(data, locale) {
     const container = document.getElementById('countries');
     for (const country of data) {
         container.appendChild(createCountryCard(country, locale));
+    }
+}
+
+function updateCountryCards(locale) {
+    const countries = document.querySelectorAll(".countries");
+    for (const country of countriesData) {
+        let countryCard = countries.querySelector(`[data-country-id="${country.id}"]`)
+        countryCard.querySelector(".card-title").textContent = country.translations.name[locale]
     }
 }
 
@@ -27,9 +57,10 @@ function createCountryCard(data, locale) {
 
     const card = document.createElement("div");
     card.classList.add("card");
+    card.setAttribute("data-country-id", data.id);
 
     const container = document.createElement("a");
-    container.setAttribute("href", `./warships/${data.reference}`);
+    container.setAttribute("href", `./country.html?id=${data.id}`);
     container.classList.add("card-wave-container");
 
     const wave = document.createElement("div");
@@ -43,7 +74,7 @@ function createCountryCard(data, locale) {
 
     const cardTitle = document.createElement("div");
     cardTitle.classList.add("card-title", "flex-m", "disable-select");
-    cardTitle.textContent = data.translations[locale];
+    cardTitle.textContent = data.translations.name[locale];
     cardTitle.style.color = `rgba(${fontColor.r}, ${fontColor.g}, ${fontColor.b}, 1)`;
 
     container.append(wave, waveInner, cardTitle);
@@ -53,19 +84,17 @@ function createCountryCard(data, locale) {
 
 async function updateLang(locale) {
     const countriesTitle = document.querySelectorAll('.card-title');
-    countriesTitle.forEach((cardTitle, index) => {
-        cardTitle.textContent = countriesData.countries[index].translations[locale];
+    countriesTitle.forEach((countryTitle, index) => {
+        countryTitle.textContent = countriesData[index].translations.name[locale];
     });
-    addListenerUpdateLang();
+    await addListenerUpdateLang();
 }
 
 async function addListenerUpdateLang() {
-    const langOptions = document.querySelectorAll('.lang-option');
-    langOptions.forEach(langOption => {
-        langOption.addEventListener("click", async function () {
-            await updateLang(langOption.dataset.langId);
+    const langOptions = document.querySelectorAll(".lang-option");
+    for (let langOption of langOptions) {
+        langOption.addEventListener("click", function () {
+            updateLang(langOption.dataset.langId);
         });
-    });
+    }
 }
-
-await initCountriesPage();

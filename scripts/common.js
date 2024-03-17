@@ -21,7 +21,6 @@ async function initIndexPage() {
 function createPathReference(path, buttonId, buttonRef) {
     const pathParts = path.split("/");
     const pathLength = pathParts.length;
-    pathParts.length
 
     if ((pathParts[pathLength - 1] === buttonRef) || (isRoot(path) && (buttonId === "index"))) {
         return "#top";
@@ -57,15 +56,14 @@ function createNavButton(data, locale) {
     buttonTooltip.innerHTML = data.translations[locale];
 
     buttonContainer.append(buttonIcon, buttonTooltip);
-
     return buttonContainer;
 }
 
 function createNavbar(theme, locale) {
     navbar.innerHTML = "";
-    navbar.classList.add("disable-select", "flex-m-all-child");
+    navbar.classList.add("disable-select", "flex-m-children");
 
-    commonData.navbarButtons.forEach((button) => {
+    commonData.views.forEach((button) => {
         navbar.appendChild(createNavButton(button, locale));
         if (button.hrAfter) navbar.appendChild(document.createElement("hr"));
     });
@@ -80,7 +78,7 @@ function createNavbar(theme, locale) {
 }
 
 function updateNavbar(locale) {
-    commonData.navbarButtons.forEach((button) => {
+    commonData.views.forEach((button) => {
         let buttonContainer = navbar.querySelector(`[data-button-id="${button.id}"]`);
         let buttonIcon = buttonContainer.querySelector("i");
         let buttonTooltip = buttonContainer.querySelector("span");

@@ -1,4 +1,4 @@
-:root {
+/*:root {
     --accent-color: #016eba;
     --lightest-color: #e0f0fe;
     --lighter-color: #bae1fd;
@@ -6,14 +6,12 @@
     --dark-color: #025ea2;
     --darker-color: #0c436e;
     --darkest-color: #082a49;
-
-    --navbar-w: calc(var(--nav-tooltip-w) + var(--nav-button-w));
+    --nav-bar-w: calc(var(--nav-tooltip-w) + var(--nav-button-w));
     --nav-button-h: 54px;
     --nav-button-w: 54px;
     --nav-tooltip-w: 162px;
 }
 
-/*noinspection CssUnusedSymbol*/
 .light-theme {
     --darkest-color: #e0f0fe;
     --darker-color: #bae1fd;
@@ -23,33 +21,37 @@
     --lightest-color: #082a49;
 }
 
-/*noinspection CssUnusedSymbol*/
-.flex-m {
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Calibri, sans-serif;
+}
+
+.flex-m,
+.flex-m-children *:not(.flex-m-children) {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/*noinspection CssUnusedSymbol*/
 .flex-m-force {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
 }
 
-/*noinspection CssUnusedSymbol*/
-.flex-m-all-child *:not(.flex-m-all-child) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/*noinspection CssUnusedSymbol*/
 .disable-select {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.w-fit {
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
 }
 
 ::-webkit-scrollbar {
@@ -64,13 +66,6 @@
     border: 0.25rem solid var(--darkest-color);
     border-radius: 1rem;
     background: linear-gradient(45deg, #00aeff, #a68eff);
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Calibri, sans-serif;
 }
 
 body {
@@ -122,26 +117,24 @@ div.resources {
     transition: width 0.2s;
 }
 
-/*noinspection CssUnusedSymbol*/
 #navbar .nav-button {
+    z-index: 9999;
     background: var(--darkest-color);
+    color: var(--lightest-color);
     height: var(--nav-button-h);
-    cursor: pointer;
-    z-index: 99;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 0 1rem 1rem 0;
     width: var(--nav-button-w);
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 0 1rem 1rem 0;
     transition: width 0.3s ease;
 }
 
-/*noinspection CssUnusedSymbol*/
+
 #navbar .nav-button:not(#theme-toggle,#lang-selector):hover {
-    width: var(--navbar-w);
+    width: var(--nav-bar-w);
 }
 
-/*noinspection CssInvalidPropertyValue*/
 #navbar #lang-selector {
     width: -moz-fit-content;
     width: -webkit-fit-content;
@@ -153,11 +146,11 @@ div.resources {
 }
 
 #navbar .nav-button span {
+    opacity: 0;
+    width: 0;
     text-align: center;
     overflow: hidden;
     white-space: pre-wrap;
-    width: 0;
-    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
@@ -166,10 +159,6 @@ div.resources {
     width: var(--nav-tooltip-w);
     padding: 0 0.5rem 0 0.5rem;
     text-overflow: clip;
-}
-
-#navbar .nav-button#lang-selector:hover span {
-    width: fit-content;
 }
 
 #navbar .nav-button i {
@@ -196,6 +185,7 @@ div.resources {
 }
 
 #navbar .nav-button#lang-selector:hover span {
+    width: fit-content;
     padding: 0;
 }
 
@@ -209,81 +199,77 @@ div.resources {
     height: 100%;
     min-height: 100vh;
     z-index: 9999;
+
+    --wave-w: 300px;
+    --wave-h: 100px;
 }
 
-/*noinspection CssUnusedSymbol*/
 #loading-screen .loading-wave {
-    width: 300px;
-    height: 100px;
+    width: var(--wave-w);
+    height: var(--wave-h);
     align-items: flex-end;
 }
 
-/*noinspection CssUnusedSymbol*/
 #loading-screen .loading-bar {
-    width: 20px;
-    height: 10px;
-    margin: 0 5px;
     background-color: var(--accent-color);
+    width: calc(var(--wave-w) / 15);
+    height: calc(var(--wave-h) / 10);
+    margin: 0 5px;
     border-radius: 5px;
     animation: loading-wave-animation 1s ease-in-out infinite;
 }
 
-/*noinspection CssUnusedSymbol*/
 #loading-screen .loading-bar:nth-child(2) {
     animation-delay: 0.1s;
 }
 
-/*noinspection CssUnusedSymbol*/
 #loading-screen .loading-bar:nth-child(3) {
     animation-delay: 0.2s;
 }
 
-/*noinspection CssUnusedSymbol*/
 #loading-screen .loading-bar:nth-child(4) {
     animation-delay: 0.3s;
 }
 
 @keyframes loading-wave-animation {
-    0% {
-        height: 10px;
+    0%,100% {
+        height: calc(var(--wave-h) / 10);
     }
 
     50% {
-        height: 50px;
-    }
-
-    100% {
-        height: 10px;
+        height: calc(var(--wave-h) / 2);
     }
 }
 
 #content .calculations {
-    padding: 1rem;
-    grid-gap: 2rem;
-    row-gap: 1rem;
     display: flex;
     justify-content: space-around;
     align-items: baseline;
-    flex-wrap: wrap;
+    grid-gap: 2rem;
+    row-gap: 1rem;
     margin-top: 14em;
     margin-bottom: 150px;
+    padding: 1rem;
+    flex-wrap: wrap;
+
+    --converter-w: 400px;
+    --converter-w-min: 150px;
+    --converter-h: 400px;
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .calculations .card {
     display: flex;
     flex-direction: column;
     background-color: var(--darkest-color);
-    color: var(--lightest-color);
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     width: 400px;
     min-width: 150px;
+    color: var(--lightest-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
     flex-basis: calc(30%);
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .calculations .card-header {
     flex-direction: column;
     row-gap: 10px;
@@ -296,7 +282,6 @@ div.resources {
     font-size: 1.25rem;
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .calculations .card-title {
     font-weight: bold;
     text-align: center;
@@ -313,7 +298,6 @@ div.resources {
     outline: var(--accent-color) solid 2px;
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .calculations .input-group,
 #content .calculations .output-group {
     flex-direction: column;
@@ -369,7 +353,6 @@ div.resources {
         font-size: .75rem;
     }
 
-    /*noinspection CssUnusedSymbol*/
     #content .calculations .card {
         padding: 10px;
         width: 100%;
@@ -457,7 +440,6 @@ h1 {
     color: #fff;
 }
 
-/*noinspection CssUnusedSymbol*/
 footer .developer-info {
     width: 100%;
     font-size: 14px;
@@ -475,13 +457,11 @@ footer .developer-info a:hover {
     cursor: pointer;
 }
 
-/*noinspection CssUnusedSymbol*/
 footer .social-icons {
     width: 50%;
     justify-content: space-between;
 }
 
-/*noinspection CssUnusedSymbol*/
 footer .social-icon {
     display: inline-block;
     font-size: 1.3rem;
@@ -489,13 +469,11 @@ footer .social-icon {
     transition: color 0.3s ease;
 }
 
-/*noinspection CssUnusedSymbol*/
 footer .social-icon:hover {
     color: var(--accent-color);
 }
 
 
-/*noinspection CssUnusedSymbol*/
 footer .donate-banner {
     display: inline-block;
     padding: 10px 30px;
@@ -507,7 +485,6 @@ footer .donate-banner {
     transition: background-color 0.3s ease;
 }
 
-/*noinspection CssUnusedSymbol*/
 footer .donate-banner:hover {
     background-color: var(--accent-color);
 }
@@ -539,26 +516,22 @@ footer .donate-banner i {
         flex-direction: row;
     }
 
-    /*noinspection CssUnusedSymbol*/
     footer .developer-info {
         width: 35%;
         max-width: 500px;
     }
 
-    /*noinspection CssUnusedSymbol*/
     footer .social-icons {
         width: 20%;
         max-width: 200px;
     }
 
-    /*noinspection CssUnusedSymbol*/
     footer .donate-banner {
         width: 65%;
         max-width: 200px;
     }
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .countries .card {
     position: relative;
     width: 250px;
@@ -568,17 +541,14 @@ footer .donate-banner i {
     cursor: pointer;
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .countries .card:hover {
     box-shadow: 0 0 10px 4px white;
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .countries .card-wave-container {
     text-decoration: none;
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .countries .card-wave {
     position: absolute;
     z-index: 1;
@@ -589,7 +559,6 @@ footer .donate-banner i {
     border-radius: 12px;
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .countries .card-wave-inner {
     content: "";
     position: absolute;
@@ -603,7 +572,6 @@ footer .donate-banner i {
     animation: calc(var(--wave-duration) * 2) card-wave-animation infinite linear forwards;
 }
 
-/*noinspection CssUnusedSymbol*/
 #content .countries .card-title {
     position: relative;
     z-index: 2;
@@ -628,4 +596,4 @@ footer .donate-banner i {
     to {
         transform: rotate(360deg);
     }
-}
+}*/
